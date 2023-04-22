@@ -1,0 +1,6 @@
+services:
+  - name: web
+    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+    startCommand: gunicorn api.core.wsgi:application --bind 0.0.0.0:$PORT
+    env:
+      DATABASE_URL: postgres://get_talent_user:u4jHMl5UNA7CafgybFqh6tmPnaIEuonQ@dpg-ch264h5269v61fbviui0-a.oregon-postgres.render.com/get_talent
