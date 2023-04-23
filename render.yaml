@@ -10,9 +10,9 @@ databases:
    plan: standard
    repo: https://github.com/render-oss/docker-pgbouncer
    envVars:
-   - key: DATABASE_URL
+   - key: postgres://get_talent_user:u4jHMl5UNA7CafgybFqh6tmPnaIEuonQ@dpg-ch264h5269v61fbviui0-a/get_talent
      fromDatabase:
-       name: mysite
+       name: ch264h5269v61fbviui0
        property: connectionString
    - key: POOL_MODE
      value: transaction
