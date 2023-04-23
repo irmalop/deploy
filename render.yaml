@@ -1,6 +1,24 @@
-services:
-  - name: web
-    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
-    startCommand: gunicorn api.core.wsgi:application --bind 0.0.0.0:$PORT
-    env:
-      DATABASE_URL: postgres://get_talent_user:u4jHMl5UNA7CafgybFqh6tmPnaIEuonQ@dpg-ch264h5269v61fbviui0-a.oregon-postgres.render.com/get_talent
+databases:
+  - name: ch264h5269v61fbviui0
+    databaseName: get_talent
+    user: get_talent_user
+
+ services:
+ - type: pserv
+   name: pgbouncer
+   env: docker
+   plan: standard
+   repo: https://github.com/render-oss/docker-pgbouncer
+   envVars:
+   - key: DATABASE_URL
+     fromDatabase:
+       name: mysite
+       property: connectionString
+   - key: POOL_MODE
+     value: transaction
+   - key: SERVER_RESET_QUERY
+     value: DISCARD ALL
+   - key: MAX_CLIENT_CONN
+     value: 500
+   - key: DEFAULT_POOL_SIZE
+     value: 50
